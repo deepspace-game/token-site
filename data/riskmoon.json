@@ -1,0 +1,38 @@
+{
+    "symbol": "RISKMOON",
+    "logo": "https://www.riskmoon.com/token/images/RISKMOON-Icon.png",
+    "contractAddress": "0xa96f3414334F5A0A529ff5d9D8ea95f42147b8C9",
+    "burnAddress": "0x000000000000000000000000000000000000dead",
+    "burnBalance": "196569229376140",
+    "excludedCirculationWallets": [
+        {
+            "address": "0x55ddddfddab484146db25c42a4e3a4b3c161be8e",
+            "balance": "194198355523621",
+            "owned_by_desc": "PancakeSwap: RISKMOON - Liquidity Wallet",
+            "status": "Locked"
+        }
+    ],
+    "releaseDate": "March 25, 2021",
+    "decimal": 9,
+    "divisor": "1000000000",
+    "price": "0.0000000038",
+    "socialScore": 95824,
+    "maximumSupply": "1000000000000000",
+    "totalTransactions": 0,
+    "holders": 44305,
+    "totalSupply": 803430770623860,
+    "circulatingSupply": 609232415100239,
+    "feesDistributed": "N/A",
+    "marketCap": "2315083.18",
+    "dataProviders": [
+        {
+            "provider": "BscScan",
+            "url": "https://www.bscscan.com/"
+        },
+        {
+            "provider": "LunarCRUSH",
+            "url": "https://lunarcrush.com/"
+        }
+    ],
+    "lastUpdated": "2021-06-13 17:39:19"
+}

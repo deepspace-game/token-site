@@ -1,0 +1,18 @@
+One time install for live stats
+
+1) Put the files in your web directory
+2) Navigate to the web directory on the web server and run this command:
+
+composer install --ignore-platform-reqs
+composer require gmostafa/php-graphql-client
+
+
+3) edit your settings.php to look how you would like
+
+4) setup cron job to do the following
+
+change the 5 to however often you want to update the stats (note: change the setting refreshJSONCache in settings.php to coincide)
+
+crontab -e
+
+*/2 * * * * wget --spider --timeout=0 --tries=1 "https://riskmoon.com/token/?action=update"
