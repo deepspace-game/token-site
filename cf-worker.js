@@ -35,6 +35,7 @@ async function buildJSON() {
     },
   }
 
+  await calcTokenDecimal()
   await getMaximumSupply()
   await getBurned()
   await getTotalSupply()
@@ -43,6 +44,7 @@ async function buildJSON() {
 
   const data = {
     contract: CONTRACT,
+    divisor: DIVISOR,
     burn_address: BURN_ADDRESS,
     burned: burned,
     maximum_supply: maxSupply,
@@ -61,7 +63,7 @@ async function getMaximumSupply() {
   const url = "https://api.bscscan.com/api?module=stats&action=tokensupply&contractaddress=" + CONTRACT + "&apikey=" + BSCSCAN_API
   const response = await fetch(url, init)
   const results = await gatherResponse(response)
-  maxSupply = JSON.parse(results)["result"]
+  maxSupply = formatToken(JSON.parse(results)["result"])
   console.log("Maximum Supply: " + maxSupply)
 }
 
@@ -71,7 +73,7 @@ async function getBurned() {
   const url = "https://api.bscscan.com/api?module=account&action=tokenbalance&contractaddress=" + CONTRACT + "&address=" + BURN_ADDRESS + "&tag=latest&apikey=" + BSCSCAN_API 
   const response = await fetch(url, init)
   const results = await gatherResponse(response)
-  burned = JSON.parse(results)["result"]
+  burned = formatToken(JSON.parse(results)["result"])
   console.log("Burned: " + burned)
 }
 
@@ -106,7 +108,7 @@ async function getCirculatingSupply() {
       const url = "https://api.bscscan.com/api?module=account&action=tokenbalance&contractaddress=" + CONTRACT + "&address=" + exclusion + "&tag=latest&apikey=" + BSCSCAN_API 
       const response = await fetch(url, init)
       const results = await gatherResponse(response)
-      tokenAmount = JSON.parse(results)["result"]
+      tokenAmount = formatToken(JSON.parse(results)["result"])
       console.log("Token Amount: " + tokenAmount)
 
       circulatingSupply = circulatingSupply - tokenAmount
@@ -203,6 +205,42 @@ async function writeValuesKV() {
   }
 
   console.log("finished checking KV pairs")
+}
+
+async function calcTokenDecimal() {
+  console.log("Calculating Token Decimal...")
+  console.log("Divisor: " + DIVISOR)
+
+  decimal = "1"
+
+  console.log("Decimal is currently: " + decimal)
+
+  const forLoop = async _ => {
+    console.log('Start')
+
+    for (let index = 0; index < DIVISOR; index++) {
+      decimal += "0"
+      console.log("Decimal is currently: " + decimal)
+    }
+
+    console.log('End')
+  }
+
+  await forLoop()
+
+  console.log("finished with decimal: " + decimal)
+}
+
+function formatToken(value) {
+
+  console.log  ("value: " + value)
+  console.log ("decimal:" + decimal)
+
+  value = value / decimal
+
+  console.log  ("new value: " + value)
+
+  return value
 }
 
 addEventListener("fetch", event => {
