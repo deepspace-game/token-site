@@ -2,8 +2,6 @@
  * Get maximum supply from bscscan
  */
 
-const url = "https://api.bscscan.com/api?module=stats&action=tokensupply&contractaddress=" + CONTRACT + "&apikey=" + BSCSCAN_API
-
 async function gatherResponse(response) {
   const { headers } = response
   const contentType = headers.get("content-type") || ""
@@ -30,6 +28,7 @@ async function buildJSON() {
   }
 
   await getMaximumSupply(init)
+  await getBurned(init)
   await writeValuesKV()
 
   return new Response("outputJSON", init)
@@ -38,9 +37,21 @@ async function buildJSON() {
 async function getMaximumSupply(init) {
   console.log("Pulling maximum supply...")
   console.log("Provider: bscscan")
+  const url = "https://api.bscscan.com/api?module=stats&action=tokensupply&contractaddress=" + CONTRACT + "&apikey=" + BSCSCAN_API
   const response = await fetch(url, init)
   const results = await gatherResponse(response)
   maxSupply = JSON.parse(results)["result"]
+  console.log("Maximum Supply: " + maxSupply)
+}
+
+async function getBurned(init) {
+  console.log("Pulling total burned tokens...")
+  console.log("Provider: bscscan")
+  const url = "https://api.bscscan.com/api?module=account&action=tokenbalance&contractaddress=" + CONTRACT + "&address=" + BURN_ADDRESS + "&tag=latest&apikey=" + BSCSCAN_API 
+  const response = await fetch(url, init)
+  const results = await gatherResponse(response)
+  burned = JSON.parse(results)["result"]
+  console.log("Burned: " + burned)
 }
 
 async function writeValuesKV() {
@@ -52,7 +63,7 @@ async function writeValuesKV() {
   if (KV_MAX_SUPPLY === null) {
     console.log("Failed to pull value: MAXIMUM_SUPPLY - 404 ERROR")
   } else if (KV_MAX_SUPPLY == maxSupply) {
-    console.log("No update needed, value matches")
+    console.log("Max Supply: No update needed, value matches")
   } else {
       console.log("Updating max supply to " + maxSupply)
       await DEEPSPACETOKEN.put("MAXIMUM_SUPPLY", maxSupply)
@@ -65,10 +76,34 @@ async function writeValuesKV() {
   if (KV_CONTRACT === null) {
     console.log("Failed to pull value: CONTRACT - 404 ERROR")
   } else if (KV_CONTRACT == CONTRACT) {
-    console.log("No update needed, value matches")
+    console.log("Contract: No update needed, value matches")
   } else {
       console.log("Updating contract address to " + CONTRACT)
       await DEEPSPACETOKEN.put("CONTRACT", CONTRACT)
+  }
+
+  //checking burn address
+  const KV_BURN_ADDRESS = await DEEPSPACETOKEN.get("BURN_ADDRESS")
+  
+  if (KV_BURN_ADDRESS === null) {
+    console.log("Failed to pull value: BURN_ADDRESS - 404 ERROR")
+  } else if (KV_BURN_ADDRESS == BURN_ADDRESS) {
+    console.log("Burn Address: No update needed, value matches")
+  } else {
+      console.log("Updating burn address to " + BURN_ADDRESS)
+      await DEEPSPACETOKEN.put("BURN_ADDRESS", BURN_ADDRESS)
+  }
+
+  //checking burned
+  const KV_BURNED = await DEEPSPACETOKEN.get("BURNED")
+  
+  if (KV_BURNED === null) {
+    console.log("Failed to pull value: BURNED - 404 ERROR")
+  } else if (KV_BURNED == BURN_ADDRESS) {
+    console.log("Burned: No update needed, value matches")
+  } else {
+      console.log("Updating burned to " + burned)
+      await DEEPSPACETOKEN.put("BURNED", burned)
   }
 
   console.log("finished checking KV pairs")
