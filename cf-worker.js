@@ -99,7 +99,7 @@ async function writeValuesKV() {
   
   if (KV_BURNED === null) {
     console.log("Failed to pull value: BURNED - 404 ERROR")
-  } else if (KV_BURNED == BURN_ADDRESS) {
+  } else if (KV_BURNED == burned) {
     console.log("Burned: No update needed, value matches")
   } else {
       console.log("Updating burned to " + burned)
