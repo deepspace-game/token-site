@@ -29,13 +29,13 @@ async function buildJSON() {
     },
   }
 
-  getMaximumSupply()
-  //writeValuesKV()
+  await getMaximumSupply(init)
+  await writeValuesKV()
 
   return new Response("outputJSON", init)
 }
 
-async function getMaximumSupply() {
+async function getMaximumSupply(init) {
   console.log("Pulling maximum supply...")
   console.log("Provider: bscscan")
   const response = await fetch(url, init)
@@ -44,9 +44,34 @@ async function getMaximumSupply() {
 }
 
 async function writeValuesKV() {
-  console.log("writing to KV")
-  await DEEPSPACETOKEN.put("MAXIMUM_SUPPLY", maxSupply)
-  await DEEPSPACETOKEN.put("CONTRACT", CONTRACT)
+  console.log("checking KV pairs")
+
+  //checking max supply
+  const KV_MAX_SUPPLY = await DEEPSPACETOKEN.get("MAXIMUM_SUPPLY")
+  
+  if (KV_MAX_SUPPLY === null) {
+    console.log("Failed to pull value: MAXIMUM_SUPPLY - 404 ERROR")
+  } else if (KV_MAX_SUPPLY == maxSupply) {
+    console.log("No update needed, value matches")
+  } else {
+      console.log("Updating max supply to " + maxSupply)
+      await DEEPSPACETOKEN.put("MAXIMUM_SUPPLY", maxSupply)
+  }
+  
+
+  //checking contract address
+  const KV_CONTRACT = await DEEPSPACETOKEN.get("CONTRACT")
+  
+  if (KV_CONTRACT === null) {
+    console.log("Failed to pull value: CONTRACT - 404 ERROR")
+  } else if (KV_CONTRACT == CONTRACT) {
+    console.log("No update needed, value matches")
+  } else {
+      console.log("Updating contract address to " + CONTRACT)
+      await DEEPSPACETOKEN.put("CONTRACT", CONTRACT)
+  }
+
+  console.log("finished checking KV pairs")
 }
 
 addEventListener("fetch", event => {
