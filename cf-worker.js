@@ -5,6 +5,8 @@
  * 
  * Providers:
  * --bscscan
+ * --LunarCRUSH
+ * --BitQuery
  * --Token Team
  * --Calculations
  * 
@@ -40,17 +42,24 @@ async function buildJSON() {
   await getBurned()
   await getTotalSupply()
   await getCirculatingSupply()
+  await getLunarCrushInfo()
+  await getTokenTransactionsHoldersInfo()
   await writeValuesKV()
 
   const data = {
     contract: CONTRACT,
+    name: tokenName,
+    symbol: SYMBOL,
     divisor: DIVISOR,
     burn_address: BURN_ADDRESS,
     burned: burned,
     maximum_supply: maxSupply,
     total_supply: totalSupply,
     circulating_supply: circulatingSupply,
-    exclude_circulating_supply: JSON.parse(excludedSupplyList)
+    exclude_circulating_supply: JSON.parse(excludedSupplyList),
+    social_score: socialScore,
+    total_transactions: transactionsCount,
+    holders: holderCount
   }
 
   const json = JSON.stringify(data, null, 2)
@@ -146,6 +155,66 @@ function sleep(ms) {
       return new Promise(resolve => setTimeout(resolve, ms));
 }
 
+async function getLunarCrushInfo() {
+  console.log("Gathering token data from LunarCRUSH...")
+  console.log("Provider: LunarCRUSH")
+  console.log("social_score_calc_24h_previous //Sum of followers, retweets, likes, reddit karma etc of social posts collected from 48 hours ago to 24 hours ago")
+  console.log("name //The full name of the asset")
+  const url = "https://api.lunarcrush.com/v2?data=assets&key=" + LUNARCRUSH_API  + "&symbol=" + SYMBOL
+  const response = await fetch(url, init)
+  const results = JSON.parse(await gatherResponse(response))
+
+  console.log(results)
+
+  tokenName = results["data"]["0"]["name"]
+  socialScore = results["data"]["0"]["social_score_calc_24h_previous"]
+
+  console.log("Token Name: " + tokenName)
+  console.log("Social Score: " + socialScore)
+}
+
+async function getTokenTransactionsHoldersInfo() {
+  console.log("Gathering token transactions and holder information...")
+  console.log("Provider: BitQuery")
+  console.log("transfers-receiver_count -- unique accounts that have received the token throughout the life of the contract")
+  console.log("transfers-count -- total network transactions count")
+
+  query = `
+  query {
+      ethereum(network:bsc) {
+          transfers(currency: {is: "[CONTRACT]"}) {
+        count
+              receiver_count: count(uniq: receivers)
+          }
+      }
+  }
+  `
+  query = query.replace("[CONTRACT]", CONTRACT);
+
+  const url = "https://graphql.bitquery.io/";
+  const opts = {
+      method: "POST",
+      headers: {
+          "Content-Type": "application/json",
+          "X-API-KEY": BITQUERY_API
+      },
+      body: JSON.stringify({
+          query
+      })
+  }
+
+  const response = await fetch(url, opts)
+  const results = JSON.parse(await gatherResponse(response))
+
+  console.log(results)
+
+  transactionsCount = results["data"]["ethereum"]["transfers"][0]["count"]
+  holderCount = results["data"]["ethereum"]["transfers"][0]["receiver_count"]
+
+  console.log("Total Transactions: " + transactionsCount)
+  console.log("Total Holders: "  + holderCount)
+}
+
 async function writeValuesKV() {
   console.log("checking KV pairs")
 
@@ -234,6 +303,71 @@ async function writeValuesKV() {
       console.log("Updating exclude_circulating_supply with this JSON:")
       console.log(excludedSupplyList)
       await DEEPSPACETOKEN.put("EXCLUDE_CIRCULATING_SUPPLY", excludedSupplyList)
+  }
+
+  //checking token_name
+  const KV_TOKEN_NAME = await DEEPSPACETOKEN.get("TOKEN_NAME")
+  
+  if (KV_TOKEN_NAME === null) {
+    console.log("Failed to pull value: TOKEN_NAME - 404 ERROR")
+  } else if (KV_TOKEN_NAME == tokenName) {
+    console.log("Token Name: No update needed, value matches")
+  } else {
+      console.log("Updating token_name with this JSON:")
+      console.log(tokenName)
+      await DEEPSPACETOKEN.put("TOKEN_NAME", tokenName)
+  }
+
+  //checking symbol
+  const KV_SYMBOL = await DEEPSPACETOKEN.get("SYMBOL")
+  
+  if (KV_SYMBOL === null) {
+    console.log("Failed to pull value: SYMBOL - 404 ERROR")
+  } else if (KV_SYMBOL == SYMBOL) {
+    console.log("Symbol: No update needed, value matches")
+  } else {
+      console.log("Updating symbol with this JSON:")
+      console.log(SYMBOL)
+      await DEEPSPACETOKEN.put("SYMBOL", SYMBOL)
+  }
+
+  //checking social_score
+  const KV_SOCIAL_SCORE = await DEEPSPACETOKEN.get("SOCIAL_SCORE")
+  
+  if (KV_SOCIAL_SCORE === null) {
+    console.log("Failed to pull value: SOCIAL_SCORE - 404 ERROR")
+  } else if (KV_SOCIAL_SCORE == socialScore) {
+    console.log("Social Score: No update needed, value matches")
+  } else {
+      console.log("Updating social_score with this JSON:")
+      console.log(socialScore)
+      await DEEPSPACETOKEN.put("SOCIAL_SCORE", socialScore)
+  }
+
+  //checking transactions_count
+  const KV_TRANSACTIONS_COUNT = await DEEPSPACETOKEN.get("TRANSACTIONS_COUNT")
+  
+  if (KV_TRANSACTIONS_COUNT === null) {
+    console.log("Failed to pull value: TRANSACTIONS_COUNT - 404 ERROR")
+  } else if (KV_TRANSACTIONS_COUNT == transactionsCount) {
+    console.log("Transactions Count: No update needed, value matches")
+  } else {
+      console.log("Updating transactions_count with this JSON:")
+      console.log(transactionsCount)
+      await DEEPSPACETOKEN.put("TRANSACTIONS_COUNT", transactionsCount)
+  }
+
+  //checking holders
+  const KV_HOLDERS = await DEEPSPACETOKEN.get("HOLDERS")
+  
+  if (KV_HOLDERS === null) {
+    console.log("Failed to pull value: HOLDERS - 404 ERROR")
+  } else if (KV_HOLDERS == holderCount) {
+    console.log("Holders: No update needed, value matches")
+  } else {
+      console.log("Updating holders with this JSON:")
+      console.log(holderCount)
+      await DEEPSPACETOKEN.put("HOLDERS", holderCount)
   }
 
   console.log("finished checking KV pairs")
