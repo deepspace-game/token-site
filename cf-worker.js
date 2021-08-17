@@ -49,11 +49,11 @@ async function buildJSON() {
     burned: burned,
     maximum_supply: maxSupply,
     total_supply: totalSupply,
-    circulating_supply: circulatingSupply
+    circulating_supply: circulatingSupply,
+    exclude_circulating_supply: JSON.parse(excludedSupplyList)
   }
 
   const json = JSON.stringify(data, null, 2)
-
   return new Response(json, init)
 }
 
@@ -94,27 +94,46 @@ async function getCirculatingSupply() {
   
   excludedSupply = EXCLUDE_CIRCULATING_SUPPLY.split(', ')
   circulatingSupply = totalSupply
+  excludedSupplyList = []
 
   const forLoop = async _ => {
     console.log('Start')
 
     for (let index = 0; index < excludedSupply.length; index++) {
       exclusion = excludedSupply[index]
-      console.log(exclusion);
+      console.log("Exclusion: " + exclusion)
+
+      exclusionExtract = exclusion.split(':')
+
+      excludeWallet = exclusionExtract[0]
+      excludeTag = exclusionExtract[1]
+
+      console.log("Wallet Address: " + excludeWallet)
+      console.log("Wallet Tag: " + excludeTag)
       console.log("Total Supply is currently: " + circulatingSupply)
 
-      console.log("Pulling total tokens for wallet: " + exclusion)
+      console.log("Pulling total tokens for wallet: " + excludeWallet)
       console.log("Provider: bscscan")
-      const url = "https://api.bscscan.com/api?module=account&action=tokenbalance&contractaddress=" + CONTRACT + "&address=" + exclusion + "&tag=latest&apikey=" + BSCSCAN_API 
+      const url = "https://api.bscscan.com/api?module=account&action=tokenbalance&contractaddress=" + CONTRACT + "&address=" + excludeWallet + "&tag=latest&apikey=" + BSCSCAN_API 
       const response = await fetch(url, init)
       const results = await gatherResponse(response)
       tokenAmount = formatToken(JSON.parse(results)["result"])
       console.log("Token Amount: " + tokenAmount)
 
+      let excludeItem = {
+        "address" : excludeWallet,
+        "tag" : excludeTag,
+        "balance" : tokenAmount
+      }
+
+      excludedSupplyList.push(excludeItem);
+
       circulatingSupply = circulatingSupply - tokenAmount
-      await sleep(200)
+      await sleep(300)
     }
 
+    console.log(excludedSupplyList)
+    excludedSupplyList = JSON.stringify(excludedSupplyList)
     console.log('End')
   }
 
@@ -202,6 +221,19 @@ async function writeValuesKV() {
   } else {
       console.log("Updating circulating_supply to " + circulatingSupply)
       await DEEPSPACETOKEN.put("CIRCULATING_SUPPLY", circulatingSupply)
+  }
+
+  //checking exclude_circulating_supply
+  const KV_EXCLUDE_CIRCULATING_SUPPLY = await DEEPSPACETOKEN.get("EXCLUDE_CIRCULATING_SUPPLY")
+  
+  if (KV_EXCLUDE_CIRCULATING_SUPPLY === null) {
+    console.log("Failed to pull value: EXCLUDE_CIRCULATING_SUPPLY - 404 ERROR")
+  } else if (KV_EXCLUDE_CIRCULATING_SUPPLY == excludedSupplyList) {
+    console.log("Exclude Circulating Supply: No update needed, value matches")
+  } else {
+      console.log("Updating exclude_circulating_supply with this JSON:")
+      console.log(excludedSupplyList)
+      await DEEPSPACETOKEN.put("EXCLUDE_CIRCULATING_SUPPLY", excludedSupplyList)
   }
 
   console.log("finished checking KV pairs")
