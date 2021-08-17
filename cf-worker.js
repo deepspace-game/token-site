@@ -10,6 +10,7 @@
  * --Token Team
  * --Calculations
  * 
+ * Data is refreshed every 60 seconds
  */
 
 async function gatherResponse(response) {
@@ -37,14 +38,76 @@ async function buildJSON() {
     },
   }
 
-  await calcTokenDecimal()
-  await getMaximumSupply()
-  await getBurned()
-  await getTotalSupply()
-  await getCirculatingSupply()
-  await getLunarCrushInfo()
-  await getTokenTransactionsHoldersInfo()
-  await writeValuesKV()
+  useCache = 1
+  await checkRefreshTime()
+
+  if(useCache == 0) {
+    console.log("Forcing the update")
+    await calcTokenDecimal()
+    await getMaximumSupply()
+    await getBurned()
+    await getTotalSupply()
+    await getCirculatingSupply()
+    await getLunarCrushInfo()
+    await getTokenTransactionsHoldersInfo()
+    await writeValuesKV()
+  } else {
+    console.log("No update needed, pulling cache data")
+
+    tokenName = await DEEPSPACETOKEN.get("TOKEN_NAME")
+    if (tokenName === null) {
+      console.log("Failed to pull value: TOKEN_NAME - 404 ERROR")
+      tokenName = "nan"
+    }
+
+    burned = await DEEPSPACETOKEN.get("BURNED")
+    if (burned === null) {
+      console.log("Failed to pull value: BURNED - 404 ERROR")
+      burned = "nan"
+    }
+
+    maxSupply = await DEEPSPACETOKEN.get("MAXIMUM_SUPPLY")
+    if (maxSupply === null) {
+      console.log("Failed to pull value: MAXIMUM_SUPPLY - 404 ERROR")
+      maxSupply = "nan"
+    }
+
+    totalSupply = await DEEPSPACETOKEN.get("TOTAL_SUPPLY")
+    if (totalSupply === null) {
+      console.log("Failed to pull value: TOTAL_SUPPLY - 404 ERROR")
+      totalSupply = "nan"
+    }
+
+    circulatingSupply = await DEEPSPACETOKEN.get("CIRCULATING_SUPPLY")
+    if (circulatingSupply === null) {
+      console.log("Failed to pull value: CIRCULATING_SUPPLY - 404 ERROR")
+      circulatingSupply = "nan"
+    }
+
+    excludedSupplyList = await DEEPSPACETOKEN.get("EXCLUDE_CIRCULATING_SUPPLY")
+    if (excludedSupplyList === null) {
+      console.log("Failed to pull value: EXCLUDE_CIRCULATING_SUPPLY - 404 ERROR")
+      excludedSupplyList = "nan"
+    }
+
+    socialScore = await DEEPSPACETOKEN.get("SOCIAL_SCORE")
+    if (socialScore === null) {
+      console.log("Failed to pull value: SOCIAL_SCORE - 404 ERROR")
+      socialScore = "nan"
+    }
+
+    transactionsCount = await DEEPSPACETOKEN.get("TRANSACTIONS_COUNT")
+    if (transactionsCount === null) {
+      console.log("Failed to pull value: TOTAL_TRANSACTIONS - 404 ERROR")
+      transactionsCount = "nan"
+    }
+
+    holderCount = await DEEPSPACETOKEN.get("HOLDERS")
+    if (holderCount === null) {
+      console.log("Failed to pull value: HOLDERS - 404 ERROR")
+      holderCount = "nan"
+    }
+  }
 
   const data = {
     contract: CONTRACT,
@@ -64,6 +127,42 @@ async function buildJSON() {
 
   const json = JSON.stringify(data, null, 2)
   return new Response(json, init)
+}
+
+async function checkRefreshTime() {
+  const KV_REFRESH_TIME = await DEEPSPACETOKEN.get("REFRESH_TIME")
+  currentTime = new Date().getTime()
+  currentTimeString = new Date(currentTime).toString()
+
+  if (KV_REFRESH_TIME === null) {
+    console.log("Failed to pull value: REFRESH_TIME - 404 ERROR")
+    console.log("Forcing update")
+    useCache = 0
+  } else { 
+
+    currentTime = toTimestamp(currentTimeString)
+
+    cachedTimeString = KV_REFRESH_TIME
+
+    console.log("Current Time: " + currentTimeString)
+    console.log(currentTime)
+    console.log("Cached Time: " + cachedTimeString)
+    cachedTime = toTimestamp(cachedTimeString)
+    console.log(cachedTime)
+    const secondsDiff = currentTime - cachedTime
+
+    if(secondsDiff > REFRESH_TIMER) {
+      console.log("Forcing update - its time - difference: " + secondsDiff)
+      useCache = 0
+    } else {
+      console.log("Using cached data, its not time - difference: "  + secondsDiff)
+    }
+  }
+}
+
+function toTimestamp(strDate){
+  var datum = Date.parse(strDate);
+  return datum / 1000;
 }
 
 async function getMaximumSupply() {
@@ -313,8 +412,7 @@ async function writeValuesKV() {
   } else if (KV_TOKEN_NAME == tokenName) {
     console.log("Token Name: No update needed, value matches")
   } else {
-      console.log("Updating token_name with this JSON:")
-      console.log(tokenName)
+      console.log("Updating token_name to " + tokenName)
       await DEEPSPACETOKEN.put("TOKEN_NAME", tokenName)
   }
 
@@ -326,8 +424,7 @@ async function writeValuesKV() {
   } else if (KV_SYMBOL == SYMBOL) {
     console.log("Symbol: No update needed, value matches")
   } else {
-      console.log("Updating symbol with this JSON:")
-      console.log(SYMBOL)
+      console.log("Updating symbol to " + SYMBOL)
       await DEEPSPACETOKEN.put("SYMBOL", SYMBOL)
   }
 
@@ -339,8 +436,7 @@ async function writeValuesKV() {
   } else if (KV_SOCIAL_SCORE == socialScore) {
     console.log("Social Score: No update needed, value matches")
   } else {
-      console.log("Updating social_score with this JSON:")
-      console.log(socialScore)
+      console.log("Updating social_score to " + socialScore)
       await DEEPSPACETOKEN.put("SOCIAL_SCORE", socialScore)
   }
 
@@ -352,8 +448,7 @@ async function writeValuesKV() {
   } else if (KV_TRANSACTIONS_COUNT == transactionsCount) {
     console.log("Transactions Count: No update needed, value matches")
   } else {
-      console.log("Updating transactions_count with this JSON:")
-      console.log(transactionsCount)
+      console.log("Updating transactions_count to " + transactionsCount)
       await DEEPSPACETOKEN.put("TRANSACTIONS_COUNT", transactionsCount)
   }
 
@@ -365,9 +460,20 @@ async function writeValuesKV() {
   } else if (KV_HOLDERS == holderCount) {
     console.log("Holders: No update needed, value matches")
   } else {
-      console.log("Updating holders with this JSON:")
-      console.log(holderCount)
+      console.log("Updating holders to " + holderCount)
       await DEEPSPACETOKEN.put("HOLDERS", holderCount)
+  }
+
+  //checking holders
+  const KV_REFRESH_TIME = await DEEPSPACETOKEN.get("REFRESH_TIME")
+  
+  if (KV_REFRESH_TIME === null) {
+    console.log("Failed to pull value: REFRESH_TIME - 404 ERROR")
+  } else if (KV_REFRESH_TIME == currentTimeString) {
+    console.log("Current Time: No update needed, value matches")
+  } else {
+      console.log("Updating current_time to " + currentTimeString)
+      await DEEPSPACETOKEN.put("REFRESH_TIME", currentTimeString)
   }
 
   console.log("finished checking KV pairs")
