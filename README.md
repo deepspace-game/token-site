@@ -6,3 +6,5 @@ Supported blockchains:
 
 Learn more at: [https://dps.fyi/token](https://dps.fyi/token "https://dps.fyi/token")
 API - JSON: [https://dps.fyi/token-api](https://dps.fyi/token-api "https://dps.fyi/token-api")
+
+Runs with CloudFlare worker
