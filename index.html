@@ -6,83 +6,95 @@
 	let xhr = new XMLHttpRequest();
 	xhr.open('GET', "https://token.deepspace.game/api");
 	xhr.send();
-	
+
 	var respond;
 	var tokenName = "";
 	var tokenSymbol = "";
 	var totalBurned = "";
-	var releaseDate = "";
-	var price ="";
+	//var releaseDate = "";
+	//var price ="";
 	var holders = "";
 	var totalSupply = "";
-	var marketCap = "";
+	//var marketCap = "";
 	var followers = "";
 	var maximumSupply = "";
 	var circulatingSupply = "";
-	var volume = "";
+	//var volume = "";
 	var totalTransactions = "";
-	var decimal = "";
-	var logo = "";
+	var divisor = "";
+	//var logo = "";
 	var lastUpdated = "";
-	
+
 	largeFormat = d3.format(",.0f");
 	largeFormatDecimal = d3.format(",.2f");
 	
-  xhr.onreadystatechange = function() {
-	if (xhr.readyState === 4) {
-	  var data = xhr.response;
-	  tokenData = JSON.parse(data);
-	  console.log(tokenData);
-	  tokenName = tokenData["name"];
-	  document.getElementById('name').innerHTML = "Token Name: " + tokenName;
-	  tokenSymbol = tokenData["symbol"];
-	  document.getElementById('symbol').innerHTML = "Token Symbol: " + tokenSymbol;
-	  releaseDate = tokenData["releaseDate"];
-	  document.getElementById('releaseDate').innerHTML = "Release Date: " + releaseDate;
-	  totalBurned = tokenData["burnBalance"];
-	  document.getElementById('burnBalance').innerHTML = "Total Burned: " + largeFormat(totalBurned);
-	  tokenPrice = tokenData["price"];
-	  document.getElementById('price').innerHTML = "Price: $" + tokenPrice;
-	  holders = tokenData["holders"];
-	  document.getElementById('holders').innerHTML = "Holders: " + largeFormat(holders);
-	  marketCap = tokenData["marketCap"];
-	  document.getElementById('marketCap').innerHTML = "Market Cap: $" + largeFormatDecimal(marketCap);
-	  totalSupply = tokenData["totalSupply"];
-	  document.getElementById('totalSupply').innerHTML = "Total Supply: " + largeFormat(totalSupply);
-	  followers = tokenData["socialScore"];
-	  document.getElementById('followers').innerHTML = "Followers: " + largeFormat(followers);
-	  maximumSupply = tokenData["maximumSupply"];
-	  document.getElementById('maximumSupply').innerHTML = "Maximum Supply: " + largeFormat(maximumSupply);
-	  circulatingSupply = tokenData["circulatingSupply"];
-	  document.getElementById('circulatingSupply').innerHTML = "Circulating Supply: " + largeFormat(circulatingSupply);
-	  volume = tokenData["volume"];
-	  document.getElementById('volume').innerHTML = "Total Volume: $" + largeFormatDecimal(volume);
-	  totalTransactions = tokenData["totalTransactions"];
-	  document.getElementById('totalTransactions').innerHTML = "Total Transactions: " + largeFormat(totalTransactions);
-	  decimal = tokenData["decimal"];
-	  document.getElementById('decimal').innerHTML = "Decimal: " + decimal;
-	  logo = tokenData["logo"];
-	  document.getElementById('logo').innerHTML = "<a href=\"" + logo + "\"><img src=\"" + logo + "\" height=\"50px\" width=\"50px\" alt=\"" + tokenName + " logo\" /></a>";
-	  
-	  lastUpdated = tokenData["lastUpdated"];
-	  document.getElementById('lastUpdated').innerHTML = "Last Updated: " + lastUpdated;
-	  
-	}
-  }
+	xhr.onreadystatechange = function() {
+		if (xhr.readyState === 4) {
+		  var data = xhr.response;
+		  tokenData = JSON.parse(data);
+		  console.log(tokenData);
+			
+		  tokenName = tokenData["name"];
+		  document.getElementById('name').innerHTML = "Token Name: " + tokenName;
+			
+		  tokenSymbol = tokenData["symbol"];
+		  document.getElementById('symbol').innerHTML = "Token Symbol: " + tokenSymbol;
+			
+		  //releaseDate = tokenData["releaseDate"];
+		  //document.getElementById('releaseDate').innerHTML = "Release Date: " + releaseDate;
+			
+		  totalBurned = tokenData["burned"];
+		  document.getElementById('burned').innerHTML = "Total Burned: " + largeFormat(totalBurned);
+			
+		  tokenPrice = tokenData["price"];
+		  document.getElementById('price').innerHTML = "Price: $" + tokenPrice;
+			
+		  holders = tokenData["holders"];
+		  document.getElementById('holders').innerHTML = "Holders: " + largeFormat(holders);
+		  
+		  //marketCap = tokenData["marketCap"];
+		  //document.getElementById('marketCap').innerHTML = "Market Cap: $" + largeFormatDecimal(marketCap);
+			
+		  totalSupply = tokenData["total_supply"];
+		  document.getElementById('totalSupply').innerHTML = "Total Supply: " + largeFormat(totalSupply);
+			
+		  followers = tokenData["social_score"];
+		  document.getElementById('followers').innerHTML = "Followers: " + largeFormat(followers);
+			
+		  maximumSupply = tokenData["maximum_supply"];
+		  document.getElementById('maximumSupply').innerHTML = "Maximum Supply: " + largeFormat(maximumSupply);
+			
+		  circulatingSupply = tokenData["circulating_supply"];
+		  document.getElementById('circulatingSupply').innerHTML = "Circulating Supply: " + largeFormat(circulatingSupply);
+			
+		  //volume = tokenData["volume"];
+		  //document.getElementById('volume').innerHTML = "Total Volume: $" + largeFormatDecimal(volume);
+			
+		  totalTransactions = tokenData["total_transactions"];
+		  document.getElementById('totalTransactions').innerHTML = "Total Transactions: " + largeFormat(totalTransactions);
+			
+		  divisor = tokenData["divisor"];
+		  document.getElementById('divisor').innerHTML = "Divisor: " + divisor;
+			
+		  //logo = tokenData["logo"];
+		  //document.getElementById('logo').innerHTML = "<a href=\"" + logo + "\"><img src=\"" + logo + "\" height=\"50px\" width=\"50px\" alt=\"" + tokenName + " logo\" /></a>";
 
-	
+		  lastUpdated = tokenData["last_updated"];
+		  document.getElementById('lastUpdated').innerHTML = "Last Updated: " + lastUpdated;
+
+		}
+	}
 </script>
 </head>
 <body>
 <h1>DeepSpace Stats Client Test</h1>
-<p><b>Example for pulling token stat data with Javascript</b></p>
 <p><i>Tip: Check the console log for the full JSON response from the token stat server</i></p>
 <br><div id="name">Token Name: N/A</div>
 <br><div id="symbol">Token Symbol: N/A</div>
 <br><div id="releaseDate">Release Date: N/A</div>
 <br><div id="logo">Logo Here</div>
-<br><div id="decimal">Decimal: N/A</div>
-<br><div id="burnBalance">Total Burned: N/A</div>
+<br><div id="divisor">Divisor: N/A</div>
+<br><div id="burned">Total Burned: N/A</div>
 <br><div id="price">Price: N/A</div>
 <br><div id="holders">Holders: N/A</div>
 <br><div id="marketCap">Market Cap: N/A</div>
