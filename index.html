@@ -82,10 +82,10 @@
 		  //document.getElementById('logo').innerHTML = "<a href=\"" + logo + "\"><img src=\"" + logo + "\" height=\"50px\" width=\"50px\" alt=\"" + tokenName + " logo\" /></a>";
 
 		  shortDesc = tokenData["short_description"];
-		  document.getElementById('shortDesc').innerHTML = "Short Description: " + shortDesc;
+		  document.getElementById('shortDesc').innerHTML = "Short Description:<br>" + shortDesc;
 			
 		  longDesc = tokenData["long_description"];
-		  document.getElementById('longDesc').innerHTML = "Long Description: " + longDesc.replace('\n', '<br>');
+		  document.getElementById('longDesc').innerHTML = "Long Description:<br>" + longDesc.replace('\n', '<br>');
 			
 		  lastUpdated = tokenData["last_updated"];
 		  document.getElementById('lastUpdated').innerHTML = "Last Updated: " + lastUpdated;
