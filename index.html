@@ -11,7 +11,7 @@
 	var tokenName = "";
 	var tokenSymbol = "";
 	var totalBurned = "";
-	//var releaseDate = "";
+	var launchDate = "";
 	//var price ="";
 	var holders = "";
 	var totalSupply = "";
@@ -40,8 +40,8 @@
 		  tokenSymbol = tokenData["symbol"];
 		  document.getElementById('symbol').innerHTML = "Token Symbol: " + tokenSymbol;
 			
-		  //releaseDate = tokenData["releaseDate"];
-		  //document.getElementById('releaseDate').innerHTML = "Release Date: " + releaseDate;
+		  launchDate = tokenData["launch_date"];
+		  document.getElementById('launchDate').innerHTML = "Release Date: " + launchDate;
 			
 		  totalBurned = tokenData["burned"];
 		  document.getElementById('burned').innerHTML = "Total Burned: " + largeFormat(totalBurned);
@@ -91,7 +91,7 @@
 <p><i>Tip: Check the console log for the full JSON response from the token stat server</i></p>
 <br><div id="name">Token Name: N/A</div>
 <br><div id="symbol">Token Symbol: N/A</div>
-<!-- <br><div id="releaseDate">Release Date: N/A</div> -->
+<br><div id="launchDate">Release Date: N/A</div>
 <!-- <br><div id="logo">Logo Here</div> -->
 <br><div id="divisor">Divisor: N/A</div>
 <br><div id="burned">Total Burned: N/A</div>
