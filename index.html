@@ -24,6 +24,7 @@
 	var divisor = "";
 	//var logo = "";
 	var shortDesc = "";
+	var longDesc = "";
 	var lastUpdated = "";
 
 	largeFormat = d3.format(",.0f");
@@ -83,6 +84,9 @@
 		  shortDesc = tokenData["short_description"];
 		  document.getElementById('shortDesc').innerHTML = "Short Description: " + shortDesc;
 			
+		  longDesc = tokenData["long_description"];
+		  document.getElementById('longDesc').innerHTML = "Long Description: " + longDesc;
+			
 		  lastUpdated = tokenData["last_updated"];
 		  document.getElementById('lastUpdated').innerHTML = "Last Updated: " + lastUpdated;
 
@@ -109,6 +113,7 @@
 <br><div id="totalTransactions">Total Transactions: N/A</div>
 <br><div id="launchDate">Launch Date: N/A</div>
 <br><div id="shortDesc">Short Description: N/A</div>
+<br><div id="longDesc">Long Description: N/A</div>
 <br><div id="lastUpdated">Last Updated: N/A</div>
 </body>
 </html>
