@@ -85,7 +85,7 @@
 		  document.getElementById('shortDesc').innerHTML = "Short Description: " + shortDesc;
 			
 		  longDesc = tokenData["long_description"];
-		  document.getElementById('longDesc').innerHTML = "Long Description: " + longDesc;
+		  document.getElementById('longDesc').innerHTML = "Long Description: " + longDesc.replace('\n', '<br>');
 			
 		  lastUpdated = tokenData["last_updated"];
 		  document.getElementById('lastUpdated').innerHTML = "Last Updated: " + lastUpdated;
