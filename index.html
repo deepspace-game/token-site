@@ -23,6 +23,7 @@
 	var totalTransactions = "";
 	var divisor = "";
 	//var logo = "";
+	var shortDesc = "";
 	var lastUpdated = "";
 
 	largeFormat = d3.format(",.0f");
@@ -41,7 +42,7 @@
 		  document.getElementById('symbol').innerHTML = "Token Symbol: " + tokenSymbol;
 			
 		  launchDate = tokenData["launch_date"];
-		  document.getElementById('launchDate').innerHTML = "Release Date: " + launchDate;
+		  document.getElementById('launchDate').innerHTML = "Launch Date: " + launchDate;
 			
 		  totalBurned = tokenData["burned"];
 		  document.getElementById('burned').innerHTML = "Total Burned: " + largeFormat(totalBurned);
@@ -79,6 +80,9 @@
 		  //logo = tokenData["logo"];
 		  //document.getElementById('logo').innerHTML = "<a href=\"" + logo + "\"><img src=\"" + logo + "\" height=\"50px\" width=\"50px\" alt=\"" + tokenName + " logo\" /></a>";
 
+		  shortDesc = tokenData["short_description"];
+		  document.getElementById('shortDesc').innerHTML = "Short Description: " + shortDesc;
+			
 		  lastUpdated = tokenData["last_updated"];
 		  document.getElementById('lastUpdated').innerHTML = "Last Updated: " + lastUpdated;
 
@@ -91,7 +95,6 @@
 <p><i>Tip: Check the console log for the full JSON response from the token stat server</i></p>
 <br><div id="name">Token Name: N/A</div>
 <br><div id="symbol">Token Symbol: N/A</div>
-<br><div id="launchDate">Release Date: N/A</div>
 <!-- <br><div id="logo">Logo Here</div> -->
 <br><div id="divisor">Divisor: N/A</div>
 <br><div id="burned">Total Burned: N/A</div>
@@ -104,6 +107,8 @@
 <br><div id="circulatingSupply">Circulating Supply: N/A</div>
 <!-- <br><div id="volume">Total Volume: N/A</div> -->
 <br><div id="totalTransactions">Total Transactions: N/A</div>
+<br><div id="launchDate">Launch Date: N/A</div>
+<br><div id="shortDesc">Short Description: N/A</div>
 <br><div id="lastUpdated">Last Updated: N/A</div>
 </body>
 </html>
