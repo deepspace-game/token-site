@@ -88,8 +88,8 @@
 		  document.getElementById('logoList').innerHTML = "Logo List:<br>";
 
 		  for (let i = 0; i < logoList.length; i++) {
-		  	logoSize = logoList[i][0];
-		  	logoUrl = logoList[i][1];
+		  	logoSize = logoList[i]["logo_size"];
+		  	logoUrl = logoList[i]["logo_url"];
 		  	document.getElementById('logoList').innerHTML += "<a href=\"" + logoUrl + "\"><img src=\"" + logoUrl + "\" alt=\"" + tokenName + " - " + logoSize + " size logo\" /></a>";
 		  }
 			
