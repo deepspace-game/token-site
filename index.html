@@ -78,14 +78,20 @@
 		  divisor = tokenData["divisor"];
 		  document.getElementById('divisor').innerHTML = "Divisor: " + divisor;
 			
-		  //logo = tokenData["logo"];
-		  //document.getElementById('logo').innerHTML = "<a href=\"" + logo + "\"><img src=\"" + logo + "\" height=\"50px\" width=\"50px\" alt=\"" + tokenName + " logo\" /></a>";
-
 		  shortDesc = tokenData["short_description"];
 		  document.getElementById('shortDesc').innerHTML = "Short Description:<br>" + shortDesc;
 			
 		  longDesc = tokenData["long_description"];
 		  document.getElementById('longDesc').innerHTML = "Long Description:<br>" + longDesc.replace(/\n/g, "<br>");
+
+		  logoList = tokenData["logo_list"];
+		  document.getElementById('logoList').innerHTML = "Logo List:<br>";
+
+		  for (let i = 0; i < logoList.length; i++) {
+		  	logoSize = logoList[0];
+		  	logoUrl = logoList[1];
+		  	document.getElementById('logoList').innerHTML += "<a href=\"" + logoUrl + "\"><img src=\"" + logoUrl + "\" alt=\"" + tokenName + " - " + logoSize + " size logo\" /></a>";
+		  }
 			
 		  lastUpdated = tokenData["last_updated"];
 		  document.getElementById('lastUpdated').innerHTML = "Last Updated: " + lastUpdated;
@@ -101,7 +107,6 @@
 <p>Pro Tip: API Endpoint: <a href="https://token.deepspace.game/api">https://token.deepspace.game/api</a></p>
 <br><div id="name">Token Name: N/A</div>
 <br><div id="symbol">Token Symbol: N/A</div>
-<!-- <br><div id="logo">Logo Here</div> -->
 <br><div id="divisor">Divisor: N/A</div>
 <br><div id="burned">Total Burned: N/A</div>
 <!-- <br><div id="price">Price: N/A</div> -->
@@ -117,5 +122,6 @@
 <br><div id="shortDesc">Short Description: N/A</div>
 <br><div id="longDesc">Long Description: N/A</div>
 <br><div id="lastUpdated">Last Updated: N/A</div>
+<br><div id="logoList">Logo List Here</div>
 </body>
 </html>
