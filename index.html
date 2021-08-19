@@ -97,7 +97,7 @@
 		  }
 		
 		  excludeCirculatingSupplyList = tokenData["exclude_circulating_supply"];
-		  document.getElementById('excludeCirculatingSupply').innerHTML = "Exclude Circulating Supply List:<br>";
+		  document.getElementById('excludeCirculatingSupply').innerHTML = "Exclude Circulating Supply List:<br><br>";
 
 		  for (let i = 0; i < excludeCirculatingSupplyList.length; i++) {
 		  	excludeAddress = excludeCirculatingSupplyList[i]["address"];
@@ -110,7 +110,7 @@
 		  }
 			
 		  burnAddress = tokenData["burn_address"];
-		  document.getElementById('burnAddress').innerHTML = "Burn Address:<br>" + burnAddress;
+		  document.getElementById('burnAddress').innerHTML = "Burn Address: " + burnAddress;
 			
 		  lastUpdated = tokenData["last_updated"];
 		  document.getElementById('lastUpdated').innerHTML = "Last Updated: " + lastUpdated;
