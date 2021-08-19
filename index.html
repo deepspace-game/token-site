@@ -90,7 +90,22 @@
 		  for (let i = 0; i < logoList.length; i++) {
 		  	logoSize = logoList[i]["logo_size"];
 		  	logoUrl = logoList[i]["logo_url"];
-		  	document.getElementById('logoList').innerHTML += "<a href=\"" + logoUrl + "\"><img src=\"" + logoUrl + "\" alt=\"" + tokenName + " - " + logoSize + " size logo\" /></a>";
+			  
+		  	document.getElementById('logoList').innerHTML += "<a href=\"" + logoUrl + "\"><img src=\"" + logoUrl + "\" alt=\"" + tokenName + " - " + logoSize + " size logo\" />(" + logoSize + ")</a><br>";
+		  }
+			
+			
+		  excludeCirculatingSupplyList = tokenData["exclude_circulating_supply"];
+		  document.getElementById('excludeCirculatingSupply').innerHTML = "Exclude Circulating Supply List:<br>";
+
+		  for (let i = 0; i < excludeCirculatingSupplyList.length; i++) {
+		  	excludeAddress = excludeCirculatingSupplyList[i]["address"];
+		  	excludeTag = excludeCirculatingSupplyList[i]["tag"];
+			excludeBalance = excludeCirculatingSupplyList[i]["balance"];
+			  
+		  	document.getElementById('excludeCirculatingSupply').innerHTML += "Exclude Address: " + excludeAddress<br>";
+			document.getElementById('excludeCirculatingSupply').innerHTML += "Exclude Tag: " + excludeTag<br>";
+			document.getElementById('excludeCirculatingSupply').innerHTML += "Exclude Balance: " + excludeBalance<br>";
 		  }
 			
 		  lastUpdated = tokenData["last_updated"];
@@ -121,7 +136,11 @@
 <br><div id="launchDate">Launch Date: N/A</div>
 <br><div id="shortDesc">Short Description: N/A</div>
 <br><div id="longDesc">Long Description: N/A</div>
+<br>
+<br><div id="logoList">Logo List - N/A</div>
+<br>
+<br><div id="excludeCirculatingSupply">Exclude Circulating Supply List - N/A</div>
+<br>
 <br><div id="lastUpdated">Last Updated: N/A</div>
-<br><div id="logoList">Logo List Here</div>
 </body>
 </html>
