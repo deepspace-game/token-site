@@ -22,10 +22,12 @@
 	//var volume = "";
 	var totalTransactions = "";
 	var divisor = "";
-	//var logo = "";
 	var shortDesc = "";
 	var longDesc = "";
 	var lastUpdated = "";
+	var logoList = "";
+	var excludeCirculatingSupplyList = "";
+	var burnAddress = "";
 
 	largeFormat = d3.format(",.0f");
 	largeFormatDecimal = d3.format(",.2f");
@@ -93,8 +95,7 @@
 			  
 		  	document.getElementById('logoList').innerHTML += "<a href=\"" + logoUrl + "\"><img src=\"" + logoUrl + "\" alt=\"" + tokenName + " - " + logoSize + " size logo\" />(" + logoSize + ")</a><br>";
 		  }
-			
-			
+		
 		  excludeCirculatingSupplyList = tokenData["exclude_circulating_supply"];
 		  document.getElementById('excludeCirculatingSupply').innerHTML = "Exclude Circulating Supply List:<br>";
 
@@ -107,6 +108,9 @@
 			document.getElementById('excludeCirculatingSupply').innerHTML += "Exclude Tag: " + excludeTag + "<br>";
 			document.getElementById('excludeCirculatingSupply').innerHTML += "Exclude Balance: " + excludeBalance + "<br><br>";
 		  }
+			
+		  burnAddress = tokenData["burn_address"];
+		  document.getElementById('burnAddress').innerHTML = "Burn Address:<br>" + burnAddress;
 			
 		  lastUpdated = tokenData["last_updated"];
 		  document.getElementById('lastUpdated').innerHTML = "Last Updated: " + lastUpdated;
@@ -140,6 +144,8 @@
 <br><div id="logoList">Logo List - N/A</div>
 <br>
 <br><div id="excludeCirculatingSupply">Exclude Circulating Supply List - N/A</div>
+<br>
+<br><div id="burnAddress">Burn Address: N/A</div>
 <br>
 <br><div id="lastUpdated">Last Updated: N/A</div>
 </body>
