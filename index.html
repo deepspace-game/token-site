@@ -28,6 +28,7 @@
 	var logoList = "";
 	var excludeCirculatingSupplyList = "";
 	var burnAddress = "";
+	var explorerLink = "";
 
 	largeFormat = d3.format(",.0f");
 	largeFormatDecimal = d3.format(",.2f");
@@ -85,6 +86,9 @@
 			
 		  longDesc = tokenData["long_description"];
 		  document.getElementById('longDesc').innerHTML = "Long Description:<br>" + longDesc.replace(/\n/g, "<br>");
+			
+		  explorerLink = tokenData["explorer_link"];
+		  document.getElementById('explorerLink').innerHTML = "Explorer Link: <a href=\"" + explorerLink + "\">" + explorerLink + "</a>";
 
 		  logoList = tokenData["logo_list"];
 		  document.getElementById('logoList').innerHTML = "Logo List:<br>";
@@ -140,6 +144,7 @@
 <br><div id="launchDate">Launch Date: N/A</div>
 <br><div id="shortDesc">Short Description: N/A</div>
 <br><div id="longDesc">Long Description: N/A</div>
+<br><div id="explorerLink">Explorer Link: N/A</div>
 <br>
 <br><div id="logoList">Logo List - N/A</div>
 <br>
