@@ -12,7 +12,7 @@
 	var tokenSymbol = "";
 	var totalBurned = "";
 	var launchDate = "";
-	//var price ="";
+	var price ="";
 	var holders = "";
 	var totalSupply = "";
 	//var marketCap = "";
@@ -51,8 +51,8 @@
 		  totalBurned = tokenData["burned"];
 		  document.getElementById('burned').innerHTML = "Total Burned: " + largeFormat(totalBurned);
 			
-		  //tokenPrice = tokenData["price"];
-		  //document.getElementById('price').innerHTML = "Price: $" + tokenPrice;
+		  tokenPrice = tokenData["price"];
+		  document.getElementById('price').innerHTML = "Price: $" + tokenPrice;
 			
 		  holders = tokenData["holders"];
 		  document.getElementById('holders').innerHTML = "Holders: " + largeFormat(holders);
@@ -134,7 +134,7 @@
 <br><div id="symbol">Token Symbol: N/A</div>
 <br><div id="divisor">Divisor: N/A</div>
 <br><div id="burned">Total Burned: N/A</div>
-<!-- <br><div id="price">Price: N/A</div> -->
+<br><div id="price">Price: N/A</div>
 <br><div id="holders">Holders: N/A</div>
 <!-- <br><div id="marketCap">Market Cap: N/A</div> -->
 <br><div id="totalSupply">Total Supply: N/A</div>
