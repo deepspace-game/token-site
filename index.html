@@ -15,7 +15,7 @@
 	var price ="";
 	var holders = "";
 	var totalSupply = "";
-	//var marketCap = "";
+	var marketCap = "";
 	var followers = "";
 	var maximumSupply = "";
 	var circulatingSupply = "";
@@ -57,8 +57,8 @@
 		  holders = tokenData["holders"];
 		  document.getElementById('holders').innerHTML = "Holders: " + largeFormat(holders);
 		  
-		  //marketCap = tokenData["marketCap"];
-		  //document.getElementById('marketCap').innerHTML = "Market Cap: $" + largeFormatDecimal(marketCap);
+		  marketCap = tokenData["market_cap"];
+		  document.getElementById('marketCap').innerHTML = "Market Cap: $" + largeFormatDecimal(marketCap);
 			
 		  totalSupply = tokenData["total_supply"];
 		  document.getElementById('totalSupply').innerHTML = "Total Supply: " + largeFormat(totalSupply);
@@ -136,7 +136,7 @@
 <br><div id="burned">Total Burned: N/A</div>
 <br><div id="price">Price: N/A</div>
 <br><div id="holders">Holders: N/A</div>
-<!-- <br><div id="marketCap">Market Cap: N/A</div> -->
+<br><div id="marketCap">Market Cap: N/A</div>
 <br><div id="totalSupply">Total Supply: N/A</div>
 <br><div id="followers">Followers: N/A</div>
 <br><div id="maximumSupply">Maximum Supply: N/A</div>
