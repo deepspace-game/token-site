@@ -97,7 +97,7 @@
 		  	logoSize = logoList[i]["logo_size"];
 		  	logoUrl = logoList[i]["logo_url"];
 			  
-		  	document.getElementById('logoList').innerHTML += "<a href=\"" + logoUrl + "\"><img src=\"" + logoUrl + "\" alt=\"" + tokenName + " - " + logoSize + " size logo\" />(" + logoSize + ")</a><br>";
+		  	document.getElementById('logoList').innerHTML += "<a href=\"" + logoUrl + "\"><img src=\"" + logoUrl + "\" alt=\"" + tokenName + " - " + logoSize + " size logo\" />(" + logoSize + ")" + logoUrl + "</a><br>";
 		  }
 		
 		  excludeCirculatingSupplyList = tokenData["exclude_circulating_supply"];
