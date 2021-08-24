@@ -47,7 +47,8 @@
 		  document.getElementById('symbol').innerHTML = "Token Symbol: " + tokenSymbol;
 			
 		  tokenContract = tokenData["contract"];
-		  document.getElementById('contract').innerHTML = "Token Contract: " + tokenContract;
+		  explorerLink = tokenData["explorer_link"];
+		  document.getElementById('contract').innerHTML = "Token Contract: " + <a href=\"" + explorerLink + "\">" + tokenContract + "</a>";
 			
 		  launchDate = tokenData["launch_date"];
 		  document.getElementById('launchDate').innerHTML = "Launch Date: " + launchDate;
@@ -91,9 +92,6 @@
 		  longDesc = tokenData["long_description"];
 		  document.getElementById('longDesc').innerHTML = "Long Description:<br>" + longDesc.replace(/\n/g, "<br>");
 			
-		  explorerLink = tokenData["explorer_link"];
-		  document.getElementById('explorerLink').innerHTML = "Explorer Link: <a href=\"" + explorerLink + "\">" + explorerLink + "</a>";
-
 		  logoList = tokenData["logo_list"];
 		  document.getElementById('logoList').innerHTML = "Logo List:<br>";
 
@@ -152,7 +150,6 @@
 <br><div id="launchDate">Launch Date: N/A</div>
 <br><div id="shortDesc">Short Description: N/A</div>
 <br><div id="longDesc">Long Description: N/A</div>
-<br><div id="explorerLink">Explorer Link: N/A</div>
 <br>
 <br><div id="logoList">Logo List - N/A</div>
 <br>
