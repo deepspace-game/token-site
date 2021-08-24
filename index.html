@@ -10,6 +10,7 @@
 	var respond;
 	var tokenName = "";
 	var tokenSymbol = "";
+	var tokenContract = "";
 	var totalBurned = "";
 	var launchDate = "";
 	var price ="";
@@ -44,6 +45,9 @@
 			
 		  tokenSymbol = tokenData["symbol"];
 		  document.getElementById('symbol').innerHTML = "Token Symbol: " + tokenSymbol;
+			
+		  tokenContract = tokenData["contract"];
+		  document.getElementById('contract').innerHTML = "Token Contract: " + tokenContract;
 			
 		  launchDate = tokenData["launch_date"];
 		  document.getElementById('launchDate').innerHTML = "Launch Date: " + launchDate;
@@ -111,7 +115,7 @@
 			  
 		  	document.getElementById('excludeCirculatingSupply').innerHTML += "Exclude Address: <a href=\"" + excludeLink + "\">" + excludeAddress + "</a><br>";
 			document.getElementById('excludeCirculatingSupply').innerHTML += "Exclude Tag: " + excludeTag + "<br>";
-			document.getElementById('excludeCirculatingSupply').innerHTML += "Exclude Balance (DPS): " + excludeBalance + "<br><br>";
+			document.getElementById('excludeCirculatingSupply').innerHTML += "Exclude Balance (DPS): " + largeFormatDecimal(excludeBalance) + "<br><br>";
 		  }
 			
 		  burnAddress = tokenData["burn_address"];
@@ -133,6 +137,7 @@
 <p>Pro Tip: DEEPSPACE (DPS) Price API Endpoint: <a href="https://token.deepspace.game/price">https://token.deepspace.game/price</a></p>
 <br><div id="name">Token Name: N/A</div>
 <br><div id="symbol">Token Symbol: N/A</div>
+<br><div id="contract">Token Contract: N/A</div>
 <br><div id="divisor">Divisor: N/A</div>
 <br><div id="burned">Total Burned: N/A</div>
 <br><div id="price">Price: N/A</div>
