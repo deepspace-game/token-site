@@ -21,7 +21,6 @@
 	var followers = "";
 	var maximumSupply = "";
 	var circulatingSupply = "";
-	//var volume = "";
 	var totalTransactions = "";
 	var divisor = "";
 	var shortDesc = "";
@@ -81,9 +80,6 @@
 		  circulatingSupply = tokenData["circulating_supply"];
 		  document.getElementById('circulatingSupply').innerHTML = "Circulating Supply: " + largeFormat(circulatingSupply);
 			
-		  //volume = tokenData["volume"];
-		  //document.getElementById('volume').innerHTML = "Total Volume: $" + largeFormatDecimal(volume);
-			
 		  totalTransactions = tokenData["total_transactions"];
 		  document.getElementById('totalTransactions').innerHTML = "Total Transactions: " + largeFormat(totalTransactions);
 			
@@ -137,6 +133,7 @@
 <p>Pro Tip: Command Supported: <a href="https://token.deepspace.game/api?q=circulatingsupply">https://token.deepspace.game/api?q=circulatingsupply</a></p>
 <p>Pro Tip: DEEPSPACE (DPS) Token API Endpoint: <a href="https://token.deepspace.game/api">https://token.deepspace.game/api</a></p>
 <p>Pro Tip: DEEPSPACE (DPS) Price API Endpoint: <a href="https://token.deepspace.game/price">https://token.deepspace.game/price</a></p>
+<p>Pro Tip: OPEN SOURCE on GitHub: <a href="https://github.com/deepspacebsc/token-site">https://github.com/deepspacebsc/token-site</a></p>
 <br><div id="name">Token Name: N/A</div>
 <br><div id="symbol">Token Symbol: N/A</div>
 <br><div id="contract">Token Contract: N/A</div>
@@ -150,7 +147,6 @@
 <br><div id="followers">Followers: N/A</div>
 <br><div id="maximumSupply">Maximum Supply: N/A</div>
 <br><div id="circulatingSupply">Circulating Supply: N/A</div>
-<!-- <br><div id="volume">Total Volume: N/A</div> -->
 <br><div id="totalTransactions">Total Transactions: N/A</div>
 <br><div id="launchDate">Launch Date: N/A</div>
 <br><div id="shortDesc">Short Description: N/A</div>
