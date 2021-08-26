@@ -108,11 +108,15 @@
 		  for (let i = 0; i < excludeCirculatingSupplyList.length; i++) {
 		  	excludeAddress = excludeCirculatingSupplyList[i]["address"];
 		  	excludeTag = excludeCirculatingSupplyList[i]["tag"];
+			excludeOwner = excludeCirculatingSupplyList[i]["owner"];
+			excludeStatus = excludeCirculatingSupplyList[i]["status"];
 			excludeBalance = excludeCirculatingSupplyList[i]["balance"];
 			excludeLink = excludeCirculatingSupplyList[i]["explorer_link"];
 			  
 		  	document.getElementById('excludeCirculatingSupply').innerHTML += "Exclude Address: <a href=\"" + excludeLink + "\">" + excludeAddress + "</a><br>";
 			document.getElementById('excludeCirculatingSupply').innerHTML += "Exclude Tag: " + excludeTag + "<br>";
+			document.getElementById('excludeCirculatingSupply').innerHTML += "Exclude Owner: " + excludeOwner + "<br>";
+			document.getElementById('excludeCirculatingSupply').innerHTML += "Exclude Status: " + excludeStatus + "<br>";
 			document.getElementById('excludeCirculatingSupply').innerHTML += "Exclude Balance (DPS): " + largeFormatDecimal(excludeBalance) + "<br><br>";
 		  }
 			
