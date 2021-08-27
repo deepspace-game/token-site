@@ -27,7 +27,7 @@
 	var longDesc = "";
 	var lastUpdated = "";
 	var logoList = "";
-	var excludeCirculatingSupplyList = "";
+	var keyWalletListList = "";
 	var burnAddress = "";
 	var explorerLink = "";
 
@@ -102,24 +102,27 @@
 		  	document.getElementById('logoList').innerHTML += "(" + logoSize + ") <a href=\"" + logoUrl + "\"><img src=\"" + logoUrl + "\" alt=\"" + tokenName + " - " + logoSize + " size logo\" />" + logoUrl + "</a><br>";
 		  }
 		
-		  excludeCirculatingSupplyList = tokenData["key_wallet_list"];
-		  document.getElementById('excludeCirculatingSupply').innerHTML = "Exclude Circulating Supply List:<br><br>";
+		  keyWalletListList = tokenData["key_wallet_list"];
+		  document.getElementById('keyWalletList').innerHTML = "Key Wallet List:<br><br>";
 
-		  for (let i = 0; i < excludeCirculatingSupplyList.length; i++) {
-		  	excludeAddress = excludeCirculatingSupplyList[i]["address"];
-		  	excludeTag = excludeCirculatingSupplyList[i]["tag"];
-			excludeOwner = excludeCirculatingSupplyList[i]["owner"];
-			excludeStatus = excludeCirculatingSupplyList[i]["status"];
-			exclude = excludeCirculatingSupplyList[i]["exclude_circulating_supply"];
-			excludeBalance = excludeCirculatingSupplyList[i]["balance"];
-			excludeLink = excludeCirculatingSupplyList[i]["explorer_link"];
+		  for (let i = 0; i < keyWalletListList.length; i++) {
+		  	walletAddress = keyWalletListList[i]["address"];
+		  	walletTag = keyWalletListList[i]["tag"];
+			walletOwner = keyWalletListList[i]["owner"];
+			walletStatus = keyWalletListList[i]["status"];
+			excludeCirculatingSupply = keyWalletListList[i]["exclude_circulating_supply"];
+			walletBalance = keyWalletListList[i]["balance"];
+			walletLink = keyWalletListList[i]["explorer_link"];
+			
+			liquidityRatio = walletBalance / marketCap;
 			  
-		  	document.getElementById('excludeCirculatingSupply').innerHTML += "Exclude Address: <a href=\"" + excludeLink + "\">" + excludeAddress + "</a><br>";
-			document.getElementById('excludeCirculatingSupply').innerHTML += "Exclude Tag: " + excludeTag + "<br>";
-			document.getElementById('excludeCirculatingSupply').innerHTML += "Exclude Owner: " + excludeOwner + "<br>";
-			document.getElementById('excludeCirculatingSupply').innerHTML += "Exclude Status: " + excludeStatus + "<br>";
-			document.getElementById('excludeCirculatingSupply').innerHTML += "Exclude From Circulating Supply: " + exclude + "<br>";
-			document.getElementById('excludeCirculatingSupply').innerHTML += "Exclude Balance (DPS): " + largeFormatDecimal(excludeBalance) + "<br><br>";
+		  	document.getElementById('keyWalletList').innerHTML += "Wallet Address: <a href=\"" + walletLink + "\">" + walletAddress + "</a><br>";
+			document.getElementById('keyWalletList').innerHTML += "Wallet Tag: " + walletTag + "<br>";
+			document.getElementById('keyWalletList').innerHTML += "Wallet Owner: " + walletOwner + "<br>";
+			document.getElementById('keyWalletList').innerHTML += "Wallet Status: " + walletStatus + "<br>";
+			document.getElementById('keyWalletList').innerHTML += "Exclude From Circulating Supply: " + excludeCirculatingSupply + "<br>";
+			document.getElementById('keyWalletList').innerHTML += "Wallet Balance (DPS): " + largeFormatDecimal(walletBalance) + "<br><br>";
+			  document.getElementById('keyWalletList').innerHTML += "Liquidity Ratio: " + liquidityRatio + "<br><br>";
 		  }
 			
 		  burnAddress = tokenData["burn_address"];
@@ -160,9 +163,8 @@
 <br>
 <br><div id="logoList">Logo List - N/A</div>
 <br>
-<br><div id="excludeCirculatingSupply">Exclude Circulating Supply List - N/A</div>
+<br><div id="keyWalletList">Key Wallet List - N/A</div>
 <div id="burnAddress">Burn Address: N/A</div>
 <br><div id="lastUpdated">Last Updated: N/A</div>
 </body>
 </html>
-
