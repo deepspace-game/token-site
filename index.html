@@ -102,7 +102,7 @@
 		  	document.getElementById('logoList').innerHTML += "(" + logoSize + ") <a href=\"" + logoUrl + "\"><img src=\"" + logoUrl + "\" alt=\"" + tokenName + " - " + logoSize + " size logo\" />" + logoUrl + "</a><br>";
 		  }
 		
-		  excludeCirculatingSupplyList = tokenData["exclude_circulating_supply"];
+		  excludeCirculatingSupplyList = tokenData["key_wallet_list"];
 		  document.getElementById('excludeCirculatingSupply').innerHTML = "Exclude Circulating Supply List:<br><br>";
 
 		  for (let i = 0; i < excludeCirculatingSupplyList.length; i++) {
@@ -110,6 +110,7 @@
 		  	excludeTag = excludeCirculatingSupplyList[i]["tag"];
 			excludeOwner = excludeCirculatingSupplyList[i]["owner"];
 			excludeStatus = excludeCirculatingSupplyList[i]["status"];
+			exclude = excludeCirculatingSupplyList[i]["exclude"];
 			excludeBalance = excludeCirculatingSupplyList[i]["balance"];
 			excludeLink = excludeCirculatingSupplyList[i]["explorer_link"];
 			  
@@ -117,6 +118,7 @@
 			document.getElementById('excludeCirculatingSupply').innerHTML += "Exclude Tag: " + excludeTag + "<br>";
 			document.getElementById('excludeCirculatingSupply').innerHTML += "Exclude Owner: " + excludeOwner + "<br>";
 			document.getElementById('excludeCirculatingSupply').innerHTML += "Exclude Status: " + excludeStatus + "<br>";
+			document.getElementById('excludeCirculatingSupply').innerHTML += "Exclude From Circulating Supply: " + exclude + "<br>";
 			document.getElementById('excludeCirculatingSupply').innerHTML += "Exclude Balance (DPS): " + largeFormatDecimal(excludeBalance) + "<br><br>";
 		  }
 			
