@@ -33,6 +33,7 @@
 
 	largeFormat = d3.format(",.0f");
 	largeFormatDecimal = d3.format(",.2f");
+	largeFormatPercentage = d3.format(",.4f");
 	
 	xhr.onreadystatechange = function() {
 		if (xhr.readyState === 4) {
@@ -114,16 +115,14 @@
 			walletBalance = keyWalletListList[i]["balance"];
 			percentageNetwork = keyWalletListList[i]["percentage"];
 			walletLink = keyWalletListList[i]["explorer_link"];
-			
-			percentageNetwork = percentageNetwork.toFixed(4);
-			  
+						  
 		  	document.getElementById('keyWalletList').innerHTML += "Wallet Address: <a href=\"" + walletLink + "\">" + walletAddress + "</a><br>";
 			document.getElementById('keyWalletList').innerHTML += "Wallet Tag: " + walletTag + "<br>";
 			document.getElementById('keyWalletList').innerHTML += "Wallet Owner: " + walletOwner + "<br>";
 			document.getElementById('keyWalletList').innerHTML += "Wallet Status: " + walletStatus + "<br>";
 			document.getElementById('keyWalletList').innerHTML += "Exclude From Circulating Supply: " + excludeCirculatingSupply + "<br>";
 			document.getElementById('keyWalletList').innerHTML += "Wallet Balance (DPS): " + largeFormatDecimal(walletBalance) + "<br>";
-			document.getElementById('keyWalletList').innerHTML += "Percentage: " +percentageNetwork + "%<br>";
+			document.getElementById('keyWalletList').innerHTML += "Percentage: " + largeFormatPercentage(percentageNetwork) + "%<br>";
 			document.getElementById('keyWalletList').innerHTML += "Liquidity Ratio: " + "" + "<br><br>";
 		  }
 			
