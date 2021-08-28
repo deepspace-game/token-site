@@ -114,6 +114,8 @@
 			walletBalance = keyWalletListList[i]["balance"];
 			percentageNetwork = keyWalletListList[i]["percentage"];
 			walletLink = keyWalletListList[i]["explorer_link"];
+			
+			percentageNetwork = percentageNetwork.toFixed(4);
 			  
 		  	document.getElementById('keyWalletList').innerHTML += "Wallet Address: <a href=\"" + walletLink + "\">" + walletAddress + "</a><br>";
 			document.getElementById('keyWalletList').innerHTML += "Wallet Tag: " + walletTag + "<br>";
@@ -121,7 +123,7 @@
 			document.getElementById('keyWalletList').innerHTML += "Wallet Status: " + walletStatus + "<br>";
 			document.getElementById('keyWalletList').innerHTML += "Exclude From Circulating Supply: " + excludeCirculatingSupply + "<br>";
 			document.getElementById('keyWalletList').innerHTML += "Wallet Balance (DPS): " + largeFormatDecimal(walletBalance) + "<br>";
-			document.getElementById('keyWalletList').innerHTML += "Percentage: " + parseFloat(percentageNetwork).toFixed(4) + "%<br>";
+			document.getElementById('keyWalletList').innerHTML += "Percentage: " +percentageNetwork + "%<br>";
 			document.getElementById('keyWalletList').innerHTML += "Liquidity Ratio: " + "" + "<br><br>";
 		  }
 			
