@@ -121,7 +121,7 @@
 			document.getElementById('keyWalletList').innerHTML += "Wallet Status: " + walletStatus + "<br>";
 			document.getElementById('keyWalletList').innerHTML += "Exclude From Circulating Supply: " + excludeCirculatingSupply + "<br>";
 			document.getElementById('keyWalletList').innerHTML += "Wallet Balance (DPS): " + largeFormatDecimal(walletBalance) + "<br>";
-			document.getElementById('keyWalletList').innerHTML += "Percentage: " + percentageNetwork + "%<br>";
+			document.getElementById('keyWalletList').innerHTML += "Percentage: " + percentageNetwork.toFixed(4) + "%<br>";
 			document.getElementById('keyWalletList').innerHTML += "Liquidity Ratio: " + liquidityRatio + "<br><br>";
 		  }
 			
