@@ -21,6 +21,8 @@
 	var followers = "";
 	var maximumSupply = "";
 	var circulatingSupply = "";
+	var totalLiquidity = "";
+	var liquidityRatio = "";
 	var totalTransactions = "";
 	var divisor = "";
 	var shortDesc = "";
@@ -80,6 +82,12 @@
 			
 		  circulatingSupply = tokenData["circulating_supply"];
 		  document.getElementById('circulatingSupply').innerHTML = "Circulating Supply: " + largeFormat(circulatingSupply);
+			
+		  totalLiquidity = tokenData["total_liquidity"];
+		  document.getElementById('totalLiquidity').innerHTML = "Total Liquidity: " + largeFormat(totalLiquidity);
+
+		  liquidityRatio = tokenData["liquidity_ratio"];
+		  document.getElementById('liquidityRatio').innerHTML = "Liquidity Ratio: " + largeFormatPercentage(liquidityRatio);
 			
 		  totalTransactions = tokenData["total_transactions"];
 		  document.getElementById('totalTransactions').innerHTML = "Total Transactions: " + largeFormat(totalTransactions);
@@ -157,6 +165,8 @@
 <br><div id="followers">Followers: N/A</div>
 <br><div id="maximumSupply">Maximum Supply: N/A</div>
 <br><div id="circulatingSupply">Circulating Supply: N/A</div>
+<br><div id="totalLiquidity">Total Liqudity: N/A</div>
+<br><div id="liqudityRatio">Liquidity Ratio: N/A</div>
 <br><div id="totalTransactions">Total Transactions: N/A</div>
 <br><div id="launchDate">Launch Date: N/A</div>
 <br><div id="shortDesc">Short Description: N/A</div>
