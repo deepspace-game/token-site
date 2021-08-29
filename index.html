@@ -109,10 +109,10 @@
 		  document.getElementById('totalTransfer').innerHTML = "Total Transferred Amount: " + largeFormat(totalTransfer);
 			
 		  daysActive = tokenData["days_active"];
-		  document.getElementById('daysActive').innerHTML = "Days Active Trading: " + daysActive;
+		  document.getElementById('daysActive').innerHTML = "Days Active Trading: " + largeFormat(daysActive);
 			
 		  senders = tokenData["senders"];
-		  document.getElementById('senders').innerHTML = "Total Senders: " + senders;
+		  document.getElementById('senders').innerHTML = "Total Senders: " + largeFormat(senders);
 
 		  firstDayActive = tokenData["first_day_active"];
 		  document.getElementById('firstDayActive').innerHTML = "First Day Traded: " + firstDayActive;
@@ -196,7 +196,7 @@
 <br><div id="liquidityRatio">Liquidity Ratio: N/A</div>
 <br><div id="totalTransactions">Total Transactions: N/A</div>
 <br><div id="medianTransfer">Total Median Transferred: N/A</div>
-<br><div id="averageTransfer">Total average Transferred: N/A</div>
+<br><div id="averageTransfer">Total Average Transferred: N/A</div>
 <br><div id="totalTransfer">Total Transferred: N/A</div>
 <br><div id="daysActive">Days Actives: N/A</div>
 <br><div id="senders">Total Senders: N/A</div>
