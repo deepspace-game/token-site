@@ -24,6 +24,13 @@
 	var totalLiquidity = "";
 	var liquidityRatio = "";
 	var totalTransactions = "";
+	var medianTransfer = "";
+	var averageTransfer = "";
+	var totalTransfer = "";
+	var daysActive = "";
+	var senders = "";
+	var firstDayActive = "";
+	var lastDayActive = "":
 	var divisor = "";
 	var shortDesc = "";
 	var longDesc = "";
@@ -31,8 +38,8 @@
 	var logoList = "";
 	var keyWalletListList = "";
 	var burnAddress = "";
-	var explorerLink = "";
-
+	var explorerLink = "";	
+	
 	largeFormat = d3.format(",.0f");
 	largeFormatDecimal = d3.format(",.2f");
 	largeFormatPercentage = d3.format(",.4f");
@@ -91,6 +98,27 @@
 			
 		  totalTransactions = tokenData["total_transactions"];
 		  document.getElementById('totalTransactions').innerHTML = "Total Transactions: " + largeFormat(totalTransactions);
+			
+		  medianTransfer = tokenData["median_transfer"];
+		  document.getElementById('medianTransfer').innerHTML = "Median Transferred Amount: " + largeFormat(medianTransfer);
+			
+		  averageTransfer = tokenData["average_transfer"];
+		  document.getElementById('averageTransfer').innerHTML = "Average Transferred Amount: " + largeFormat(averageTransfer);
+			
+		  totalTransfer = tokenData["total_transfer"];
+		  document.getElementById('totalTransfer').innerHTML = "Total Transferred Amount: " + largeFormat(totalTransfer);
+			
+		  daysActive = tokenData["days_active"];
+		  document.getElementById('daysActive').innerHTML = "Days Active Trading: " + daysActive;
+			
+		  senders = tokenData["senders"];
+		  document.getElementById('senders').innerHTML = "Total Senders: " + senders;
+
+		  firstDayActive = tokenData["first_day_active"];
+		  document.getElementById('firstDayActive').innerHTML = "First Day Traded: " + firstDayActive;
+			
+		  lastDayActive = tokenData["last_day_active"];
+		  document.getElementById('lastDayActive').innerHTML = "Most Recent Day Traded: " + lastDayActive;
 			
 		  divisor = tokenData["divisor"];
 		  document.getElementById('divisor').innerHTML = "Divisor: " + divisor;
@@ -167,6 +195,13 @@
 <br><div id="totalLiquidity">Total Liqudity: N/A</div>
 <br><div id="liquidityRatio">Liquidity Ratio: N/A</div>
 <br><div id="totalTransactions">Total Transactions: N/A</div>
+<br><div id="medianTransfer">Total Median Transferred: N/A</div>
+<br><div id="averageTransfer">Total average Transferred: N/A</div>
+<br><div id="totalTransfer">Total Transferred: N/A</div>
+<br><div id="daysActive">Days Actives: N/A</div>
+<br><div id="senders">Total Senders: N/A</div>
+<br><div id="firstDayActive">First Day Traded: N/A</div>
+<br><div id="lastDayActive">Most Recent Day Traded: N/A</div>
 <br><div id="launchDate">Launch Date: N/A</div>
 <br><div id="shortDesc">Short Description: N/A</div>
 <br><div id="longDesc">Long Description: N/A</div>
