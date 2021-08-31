@@ -113,7 +113,7 @@
 		  document.getElementById('daysActive').innerHTML = "Days Active Trading: " + largeFormat(daysActive);
 			
 		  senders = tokenData["senders"];
-		  document.getElementById('senders').innerHTML = "Total Senders: " + largeFormat(senders);
+		  document.getElementById('senders').innerHTML = "Total Senders: " + largeFormatDecimal(senders);
 
 		  launchPrice = tokenData["launch_price"];
 		  document.getElementById('launchPrice').innerHTML = "Launch Price: $" + largeFormat(launchPrice);
