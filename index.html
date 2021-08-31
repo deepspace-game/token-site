@@ -38,7 +38,8 @@
 	var logoList = "";
 	var keyWalletListList = "";
 	var burnAddress = "";
-	var explorerLink = "";	
+	var explorerLink = "";
+	var launchPrice = "";
 	
 	largeFormat = d3.format(",.0f");
 	largeFormatDecimal = d3.format(",.2f");
@@ -114,6 +115,9 @@
 		  senders = tokenData["senders"];
 		  document.getElementById('senders').innerHTML = "Total Senders: " + largeFormat(senders);
 
+		  launchPrice = tokenData["launch_price"];
+		  document.getElementById('launchPrice').innerHTML = "Launch Price: " + launchPrice;
+			
 		  firstDayActive = tokenData["first_day_active"];
 		  document.getElementById('firstDayActive').innerHTML = "First Day Traded: " + firstDayActive;
 			
@@ -204,6 +208,7 @@
 <br><div id="firstDayActive">First Day Traded: N/A</div>
 <br><div id="lastDayActive">Most Recent Day Traded: N/A</div>
 <br><div id="launchDate">Launch Date: N/A</div>
+<br><div id="launchPrice">Launch Price: N/A</div>
 <br><div id="shortDesc">Short Description: N/A</div>
 <br><div id="longDesc">Long Description: N/A</div>
 <br>
