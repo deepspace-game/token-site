@@ -16,6 +16,7 @@
 	var price ="";
 	var volume = "";
 	var holders = "";
+	var receivers = "";
 	var totalSupply = "";
 	var marketCap = "";
 	var followers = "";
@@ -72,6 +73,9 @@
 			
 		  holders = tokenData["holders"];
 		  document.getElementById('holders').innerHTML = "Holders: " + largeFormat(holders);
+			
+		  receivers = tokenData["receivers"];
+		  document.getElementById('receivers').innerHTML = "Receivers: " + largeFormat(receivers);
 		  
 		  marketCap = tokenData["market_cap"];
 		  document.getElementById('marketCap').innerHTML = "Market Cap: $" + largeFormatDecimal(marketCap);
@@ -192,6 +196,7 @@
 <br><div id="price">Price: N/A</div>
 <br><div id="volume">Volume: N/A</div>
 <br><div id="holders">Holders: N/A</div>
+<br><div id="receivers">Receivers: N/A</div>
 <br><div id="marketCap">Market Cap: N/A</div>
 <br><div id="totalSupply">Total Supply: N/A</div>
 <br><div id="followers">Followers: N/A</div>
