@@ -97,7 +97,7 @@
 		  document.getElementById('circulatingSupply').innerHTML = "Circulating Supply: " + largeFormat(circulatingSupply);
 			
 		  totalLiquidity = tokenData["total_liquidity"];
-		  document.getElementById('totalLiquidity').innerHTML = "Total Liquidity: " + largeFormat(totalLiquidity);
+		  document.getElementById('totalLiquidity').innerHTML = "Total Liquidity: $" + largeFormatDecimal(totalLiquidity);
 
 		  liquidityRatio = tokenData["liquidity_ratio"];
 		  document.getElementById('liquidityRatio').innerHTML = "Liquidity Ratio: " + largeFormatPercentage(liquidityRatio) + "%";
@@ -106,13 +106,13 @@
 		  document.getElementById('totalTransactions').innerHTML = "Total Transactions: " + largeFormat(totalTransactions);
 			
 		  medianTransfer = tokenData["median_transfer"];
-		  document.getElementById('medianTransfer').innerHTML = "Median Transferred Amount: " + largeFormat(medianTransfer);
+		  document.getElementById('medianTransfer').innerHTML = "Median Transferred Amount: $" + largeFormatDecimal(medianTransfer);
 			
 		  averageTransfer = tokenData["average_transfer"];
-		  document.getElementById('averageTransfer').innerHTML = "Average Transferred Amount: " + largeFormat(averageTransfer);
+		  document.getElementById('averageTransfer').innerHTML = "Average Transferred Amount: $" + largeFormatDecimal(averageTransfer);
 			
 		  totalTransfer = tokenData["total_transfer"];
-		  document.getElementById('totalTransfer').innerHTML = "Total Transferred Amount: " + largeFormat(totalTransfer);
+		  document.getElementById('totalTransfer').innerHTML = "Total Transferred Amount: $" + largeFormatDecimal(totalTransfer);
 			
 		  daysActive = tokenData["days_active"];
 		  document.getElementById('daysActive').innerHTML = "Days Active Trading: " + largeFormat(daysActive);
@@ -121,7 +121,7 @@
 		  document.getElementById('senders').innerHTML = "Total Senders: " + largeFormatDecimal(senders);
 
 		  launchPrice = tokenData["launch_price"];
-		  document.getElementById('launchPrice').innerHTML = "Launch Price: $" + largeFormat(launchPrice);
+		  document.getElementById('launchPrice').innerHTML = "Launch Price: $" + largeFormatDecimal(launchPrice);
 			
 		  firstDayActive = tokenData["first_day_active"];
 		  document.getElementById('firstDayActive').innerHTML = "First Day Traded: " + firstDayActive;
