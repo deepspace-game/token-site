@@ -181,17 +181,17 @@
 			document.getElementById('keyWalletList').innerHTML += "Percentage: " + largeFormatPercentage(percentageNetwork) + "%<br><br>";
 		  }
 			
-		  marketList = tokenData["market_list"];
-		  document.getElementById('marketList').innerHTML = "Market List:<br><br>";
+		  marketsList = tokenData["markets_list"];
+		  document.getElementById('marketsList').innerHTML = "Markets List:<br><br>";
 
-		  for (let i = 0; i < marketList.length; i++) {
-		  	marketName = marketList[i]["market_name"];
-		  	marketTarget = marketList[i]["market_target"];
-			marketPrice = marketList[i]["market_price"];
+		  for (let i = 0; i < marketsList.length; i++) {
+		  	marketName = marketsList[i]["market_name"];
+		  	marketTarget = marketsList[i]["market_target"];
+			marketPrice = marketsList[i]["market_price"];
 						  
-		  	document.getElementById('keyWalletList').innerHTML += "Market Name: " + marketName + "<br>";
-			document.getElementById('keyWalletList').innerHTML += "Market Target: " + marketTarget + "<br>";
-			document.getElementById('keyWalletList').innerHTML += "Market Price: " + largeFormatDecimal(marketPrice) + "<br><br>";
+		  	document.getElementById('marketsList').innerHTML += "Market Name: " + marketName + "<br>";
+			document.getElementById('marketsList').innerHTML += "Market Target: " + marketTarget + "<br>";
+			document.getElementById('marketsList').innerHTML += "Market Price: " + largeFormatDecimal(marketPrice) + "<br><br>";
 		  }
 			
 		  burnAddress = tokenData["burn_address"];
@@ -243,7 +243,7 @@
 <br><div id="lastDayActive">Most Recent Day Traded: N/A</div>
 <br><div id="launchDate">Launch Date: N/A</div>
 <br><div id="launchPrice">Launch Price: N/A</div>
-<br><div id="marketList">Market List - N/A</div>
+<br><div id="marketsList">Markets List - N/A</div>
 <br><div id="shortDesc">Short Description: N/A</div>
 <br><div id="longDesc">Long Description: N/A</div>
 <br>
