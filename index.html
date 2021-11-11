@@ -112,7 +112,7 @@
 		  document.getElementById('totalLiquidity').innerHTML = "Total Liquidity: $" + largeFormatDecimal(totalLiquidity);
 			
 		  totalLiquidityBNB = tokenData["total_liquidity_bnb"];
-		  document.getElementById('totalLiquidityBNB').innerHTML = "Total Liquidity BNB: " + largeFormatDecimal(totalLiquidityBNB);
+		  document.getElementById('totalLiquidityBNB').innerHTML = "Total Liquidity BNB: " + largeFormat(totalLiquidityBNB);
 
 		  liquidityRatio = tokenData["liquidity_ratio"];
 		  document.getElementById('liquidityRatio').innerHTML = "Liquidity Ratio: " + largeFormatPercentage(liquidityRatio) + "%";
