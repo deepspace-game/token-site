@@ -34,6 +34,7 @@
 	var maximumSupply = "";
 	var circulatingSupply = "";
 	var totalLiquidity = "";
+	var totalLiquidityBNB = "";
 	var liquidityRatio = "";
 	var totalTransactions = "";
 	var medianTransfer = "";
@@ -109,6 +110,9 @@
 			
 		  totalLiquidity = tokenData["total_liquidity"];
 		  document.getElementById('totalLiquidity').innerHTML = "Total Liquidity: $" + largeFormatDecimal(totalLiquidity);
+			
+		  totalLiquidityBNB = tokenData["total_liquidity_bnb"];
+		  document.getElementById('totalLiquidityBNB').innerHTML = "Total Liquidity BNB: " + largeFormatDecimal(totalLiquidityBNB);
 
 		  liquidityRatio = tokenData["liquidity_ratio"];
 		  document.getElementById('liquidityRatio').innerHTML = "Liquidity Ratio: " + largeFormatPercentage(liquidityRatio) + "%";
@@ -231,6 +235,7 @@
 <br><div id="maximumSupply">Maximum Supply: N/A</div>
 <br><div id="circulatingSupply">Circulating Supply: N/A</div>
 <br><div id="totalLiquidity">Total Liqudity: N/A</div>
+<br><div id="totalLiquidityBNB">Total Liqudity BNB: N/A</div>
 <br><div id="liquidityRatio">Liquidity Ratio: N/A</div>
 <br><div id="totalTransactions">Total Transactions: N/A</div>
 <br><div id="medianTransfer">Total Median Transferred: N/A</div>
