@@ -28,6 +28,7 @@
 	var totalLiquidityBNB = "";
 	var liquidityRatio = "";
 	var totalTransactions = "";
+	var dailyAvgTransactions = "";
 	var medianTransfer = "";
 	var averageTransfer = "";
 	var totalTransfer = "";
@@ -110,6 +111,9 @@
 			
 		  totalTransactions = tokenData["total_transactions"];
 		  document.getElementById('totalTransactions').innerHTML = "Total Transactions: " + largeFormat(totalTransactions);
+			
+		  dailyAvgTransactions = tokenData["daily_average_transactions"];
+		  document.getElementById('dailyAvgTransactions').innerHTML = "Daily Average Transactions: " + largeFormat(dailyAvgTransactions);
 			
 		  medianTransfer = tokenData["median_transfer"];
 		  document.getElementById('medianTransfer').innerHTML = "Median Transferred Amount: $" + largeFormatDecimal(medianTransfer);
@@ -242,6 +246,7 @@ Buy DEEPSPACE (DPS) at: <a href="https://app.deepspace.game">https://app.deepspa
 <br><div id="totalLiquidityBNB">Total Liqudity BNB: N/A</div>
 <br><div id="liquidityRatio">Liquidity Ratio: N/A</div>
 <br><div id="totalTransactions">Total Transactions: N/A</div>
+<br><div id="dailyAvgTransactions">Daily Average Transactions: N/A</div>
 <br><div id="medianTransfer">Total Median Transferred: N/A</div>
 <br><div id="averageTransfer">Total Average Transferred: N/A</div>
 <br><div id="totalTransfer">Total Transferred: N/A</div>
