@@ -16,6 +16,7 @@
 	var totalBurned = "";
 	var launchDate = "";
 	var price ="";
+	var avgMarketPrice = "";
 	var volume = "";
 	var holders = "";
 	var receivers = "";
@@ -75,6 +76,9 @@
 			
 		  tokenPrice = tokenData["price"];
 		  document.getElementById('price').innerHTML = "Price: $" + tokenPrice;
+			
+		  avgMarketPrice = tokenData["market_price"];
+		  document.getElementById('avgMarketPrice').innerHTML = "Market Price: $" + avgMarketPrice;
 			
 		  holders = tokenData["holders"];
 		  document.getElementById('holders').innerHTML = "Holders: " + largeFormat(holders);
@@ -257,6 +261,7 @@ Buy DEEPSPACE (DPS) at: <a href="https://app.deepspace.game">https://app.deepspa
 <br><div id="lastDayActive">Most Recent Day Traded: N/A</div>
 <br><div id="launchDate">Launch Date: N/A</div>
 <br><div id="launchPrice">Launch Price: N/A</div>
+<br><div id="avgMarketPrice">Market Price: N/A</div>
 <br><div id="marketsList">Markets List - N/A</div>
 <br><div id="shortDesc">Short Description: N/A</div>
 <br><div id="longDesc">Long Description: N/A</div>
