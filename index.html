@@ -78,7 +78,7 @@
 		  document.getElementById('price').innerHTML = "Price: $" + tokenPrice;
 			
 		  avgMarketPrice = tokenData["market_price"];
-		  document.getElementById('avgMarketPrice').innerHTML = "Market Price: $" + avgMarketPrice;
+		  document.getElementById('avgMarketPrice').innerHTML = "Average Market Price: $" + avgMarketPrice;
 			
 		  holders = tokenData["holders"];
 		  document.getElementById('holders').innerHTML = "Holders: " + largeFormat(holders);
@@ -194,7 +194,7 @@
 						  
 		  	document.getElementById('marketsList').innerHTML += "Market Name: " + marketName + "<br>";
 			document.getElementById('marketsList').innerHTML += "Market Target: " + marketTarget + "<br>";
-			document.getElementById('marketsList').innerHTML += "Average Market Price: $" + marketPrice + "<br><br>";
+			document.getElementById('marketsList').innerHTML += "Market Price: $" + marketPrice + "<br><br>";
 		  }
 			
 		  burnAddress = tokenData["burn_address"];
