@@ -52,6 +52,7 @@
 	largeFormat = d3.format(",.0f");
 	largeFormatDecimal = d3.format(",.2f");
 	largeFormatPercentage = d3.format(",.4f");
+	smallFormatPercentage = d3.format(",.0f");
 	
 	xhr.onreadystatechange = function() {
 		if (xhr.readyState === 4) {
@@ -115,7 +116,7 @@
 		  document.getElementById('liquidityRatio').innerHTML = "Liquidity Ratio: " + largeFormatPercentage(liquidityRatio) + "%";
 			
 		  totalTaxFee = tokenData["total_tax_fee"];
-		  document.getElementById('totalTaxFee').innerHTML = "Total Tax Fee: " + largeFormatPercentage(totalTaxFee) + "%";
+		  document.getElementById('totalTaxFee').innerHTML = "Total Tax Fee: " + smallFormatPercentage(totalTaxFee) + "%";
 			
 		  totalTransactions = tokenData["total_transactions"];
 		  document.getElementById('totalTransactions').innerHTML = "Total Transactions: " + largeFormat(totalTransactions);
