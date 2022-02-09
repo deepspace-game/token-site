@@ -48,6 +48,7 @@
 	var burnAddress = "";
 	var explorerLink = "";
 	var launchPrice = "";
+	var attrsList = "";
 	
 	largeFormat = d3.format(",.0f");
 	largeFormatDecimal = d3.format(",.2f");
@@ -213,6 +214,17 @@
 			document.getElementById('marketsList').innerHTML += "Market Tokenomics Supported: " + marketTokenomics + "<br><br>";
 		  }
 			
+		  attrsList = tokenData["contract_attributes"];
+		  document.getElementById('attrsList').innerHTML = "Contract Attributes List:<br><br>";
+
+		  for (let i = 0; i < attrsList.length; i++) {
+			attrName = attrsList[i]["attribute_name"];
+		  	attrValue = attrsList[i]["attribute_value"];
+						  
+			document.getElementById('attrsList').innerHTML += "Attribute Name: " + attrName + "<br>";
+			document.getElementById('attrsList').innerHTML += "Attribute Value: " + attrValue + "<br><br>";
+		  }
+			
 		  burnAddress = tokenData["burn_address"];
 		  document.getElementById('burnAddress').innerHTML = "Burn Address: " + burnAddress;
 			
@@ -290,6 +302,7 @@ Buy DEEPSPACE (DPS) at: <a href="https://app.deepspace.game">https://app.deepspa
 <br><div id="logoList">Logo List - N/A</div>
 <br>
 <br><div id="keyWalletList">Key Wallet List - N/A</div>
+<br><div id="attrsList">Contract Attributes List - N/A</div>
 <div id="burnAddress">Burn Address: N/A</div>
 <br><div id="lastUpdated">Last Updated: N/A</div>
 </body>
