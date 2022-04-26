@@ -79,7 +79,7 @@
 			
 		  tokenPrice = tokenData["price"];
 		  document.getElementById('price').innerHTML = "Price: $" + tokenPrice;
-			
+		
 		  avgMarketPrice = tokenData["average_market_price"];
 		  document.getElementById('avgMarketPrice').innerHTML = "Average Market Price: $" + avgMarketPrice;
 			
@@ -154,6 +154,9 @@
 			
 		  shortDesc = tokenData["short_description"];
 		  document.getElementById('shortDesc').innerHTML = "Short Description:<br>" + shortDesc;
+			
+		  summaryDesc = tokenData["summary_description"];
+		  document.getElementById('summaryDesc').innerHTML = "Summary Description:<br>" + summaryDesc;
 			
 		  longDesc = tokenData["long_description"];
 		  document.getElementById('longDesc').innerHTML = "Long Description:<br>" + longDesc.replace(/\n/g, "<br>");
@@ -297,6 +300,7 @@ Buy DEEPSPACE (DPS) at: <a href="https://app.deepspace.game">https://app.deepspa
 <br><div id="avgMarketPrice">Average Market Price: N/A</div>
 <br><div id="marketsList">Markets List - N/A</div>
 <br><div id="shortDesc">Short Description: N/A</div>
+<br><div id="summaryDesc">Summary Description: N/A</div>
 <br><div id="longDesc">Long Description: N/A</div>
 <br>
 <br><div id="logoList">Logo List - N/A</div>
